@@ -1,0 +1,14 @@
+2022-04-06T17:42:59.393+0800 [ERROR] log/logger.go:40: test: [D:/Lang/Go/17/src/testing/testing.go][testing.tRunner][1259]:error
+2022-04-06T17:42:59.393+0800 [INFO]  log/logger.go:45: test: [D:/Lang/Go/17/src/testing/testing.go][testing.tRunner][1259]:info
+2022-04-06T17:47:16.433+0800 [ERROR] log/log_test.go:12: test: hcl raw error
+2022-04-06T17:47:16.433+0800 [INFO]  log/log_test.go:13: test: hcl raw error
+2022-04-06T17:47:16.433+0800 [ERROR] log/logger.go:40: test: [D:/Lang/Go/17/src/testing/testing.go][testing.tRunner][1259]:error
+2022-04-06T17:47:16.433+0800 [INFO]  log/logger.go:45: test: [D:/Lang/Go/17/src/testing/testing.go][testing.tRunner][1259]:info
+2022-04-06T17:53:23.906+0800 [ERROR] log/log_test.go:11: test: error
+2022-04-06T17:53:23.907+0800 [INFO]  log/log_test.go:12: test: info
+2022-04-06T17:54:42.875+0800 [ERROR] log/log_test.go:19: test: error
+2022-04-06T17:54:42.875+0800 [INFO]  log/log_test.go:20: test: info
+2022-04-06T17:55:10.247+0800 [ERROR] log/log_test.go:19: test: error
+2022-04-06T17:55:10.247+0800 [INFO]  log/log_test.go:20: test: info
+2022-04-06T17:55:10.247+0800 [INFO]  log/log_test.go:9: test: testA info
+2022-04-06T17:55:10.247+0800 [INFO]  log/log_test.go:13: test: testB info
