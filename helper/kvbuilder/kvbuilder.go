@@ -3,8 +3,8 @@ package kvbuilder
 import (
 	"bytes"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/json"
-	"git.u-linke.com/ulink/commons/helper/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/helper/json"
 	"io"
 	"io/ioutil"
 	"os"
@@ -16,7 +16,7 @@ import (
 // Builder is a struct to build a key/value mapping based on a list
 // of "k=v" pairs, where the value might come from stdin, a file, etc.
 type Builder struct {
-	Stdin io.Reader
+	Stdin  io.Reader
 	result map[string]interface{}
 	stdin  bool
 }
@@ -30,7 +30,7 @@ func (b *Builder) Map() map[string]interface{} {
 func (b *Builder) Add(args ...string) error {
 	for _, a := range args {
 		if err := b.add(a); err != nil {
-			return errors.WithMessageF(err,fmt.Sprintf("invalid key/value pair %q:", a),0)
+			return errors.WithMessageF(err, fmt.Sprintf("invalid key/value pair %q:", a), 0)
 		}
 	}
 
@@ -87,7 +87,7 @@ func (b *Builder) add(raw string) error {
 		if value[0] == '@' {
 			contents, err := ioutil.ReadFile(value[1:])
 			if err != nil {
-				return errors.WithMessageF(err,"error reading file: {{err}}", 0)
+				return errors.WithMessageF(err, "error reading file: {{err}}", 0)
 			}
 
 			value = string(contents)
@@ -95,10 +95,10 @@ func (b *Builder) add(raw string) error {
 			value = value[1:]
 		} else if value == "-" {
 			if b.Stdin == nil {
-				return errors.New("stdin is not supported",0)
+				return errors.New("stdin is not supported", 0)
 			}
 			if b.stdin {
-				return errors.New("stdin already consumed",0)
+				return errors.New("stdin already consumed", 0)
 			}
 			b.stdin = true
 

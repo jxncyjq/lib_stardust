@@ -4,9 +4,9 @@
 package senml
 
 import (
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/library/messaging"
-	"git.u-linke.com/ulink/commons/library/transformers"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/transformers"
 )
 
 const (
@@ -17,13 +17,13 @@ const (
 )
 
 var (
-	errDecode    = errors.New("failed to decode senml",705)
-	errNormalize = errors.New("failed to normalize senml",706)
+	errDecode    = errors.New("failed to decode senml", 705)
+	errNormalize = errors.New("failed to normalize senml", 706)
 )
 
 var formats = map[string]Format{
-	JsonDec:  JSON,
-	CborDec : CBOR,
+	JsonDec: JSON,
+	CborDec: CBOR,
 }
 
 type transformer struct {

@@ -1,6 +1,6 @@
-module git.u-linke.com/ulink/commons
+module github.com/jxncyjq/lib_stardust
 
-go 1.15
+go 1.22
 
 require (
 	github.com/Shopify/sarama v1.19.0

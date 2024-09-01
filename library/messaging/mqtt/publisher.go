@@ -5,7 +5,7 @@ package mqtt
 
 import (
 	"errors"
-	"git.u-linke.com/ulink/commons/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"

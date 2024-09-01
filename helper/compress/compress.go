@@ -5,7 +5,7 @@ import (
 	"compress/gzip"
 	"compress/lzw"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
 	"io"
 
 	"github.com/golang/snappy"

@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/compress"
+	"github.com/jxncyjq/lib_stardust/helper/compress"
 	"reflect"
 	"strings"
 	"testing"
-
 )
 
 func TestJSONUtil_CompressDecompressJSON(t *testing.T) {
@@ -59,9 +58,9 @@ func TestJSONUtil_CompressDecompressJSON(t *testing.T) {
 	// Compress an object
 	compressedBytes, err = EncodeJSONAndCompress(expected,
 		&compress.CompressionConfig{
-		Type:                 compress.CompressionTypeGzip,
-		GzipCompressionLevel: gzip.BestSpeed,
-	})
+			Type:                 compress.CompressionTypeGzip,
+			GzipCompressionLevel: gzip.BestSpeed,
+		})
 	if err != nil {
 		t.Fatal(err)
 	}

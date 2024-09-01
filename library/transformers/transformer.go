@@ -3,7 +3,7 @@
 
 package transformers
 
-import "git.u-linke.com/ulink/commons/library/messaging"
+import "github.com/jxncyjq/lib_stardust/library/messaging"
 
 // Transformer specifies API form Message transformer.
 type Transformer interface {

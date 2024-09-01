@@ -20,7 +20,9 @@
 
 package constants
 
-import "git.u-linke.com/ulink/commons/helper/errors"
+import (
+	"github.com/jxncyjq/lib_stardust/core/errors"
+)
 
 // Errors that can occur during message handling.
 var (

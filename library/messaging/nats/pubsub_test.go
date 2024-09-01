@@ -5,7 +5,7 @@ package nats_test
 
 import (
 	"fmt"
-	"git.u-linke.com/ulink/commons/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

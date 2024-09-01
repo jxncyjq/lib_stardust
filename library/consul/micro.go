@@ -2,7 +2,7 @@ package consul
 
 import (
 	"fmt"
-	"git.u-linke.com/ulink/commons/library/net/http"
+	"github.com/jxncyjq/lib_stardust/library/net/http"
 )
 
 type MicroHTTPClient interface {

@@ -18,7 +18,7 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
 	"math/big"
 	"net"
 	"net/url"
@@ -49,7 +49,7 @@ type Secret struct {
 // names rather than official names, to eliminate confusion
 type PrivateKeyType string
 
-//Well-known PrivateKeyTypes
+// Well-known PrivateKeyTypes
 const (
 	UnknownPrivateKey PrivateKeyType = ""
 	RSAPrivateKey     PrivateKeyType = "rsa"
@@ -61,24 +61,24 @@ const (
 // client use, or both, which affects which values are set
 type TLSUsage int
 
-//Well-known TLSUsage types
+// Well-known TLSUsage types
 const (
 	TLSUnknown TLSUsage = 0
 	TLSServer  TLSUsage = 1 << iota
 	TLSClient
 )
 
-//BlockType indicates the serialization format of the key
+// BlockType indicates the serialization format of the key
 type BlockType string
 
-//Well-known formats
+// Well-known formats
 const (
 	PKCS1Block BlockType = "RSA PRIVATE KEY"
 	PKCS8Block BlockType = "PRIVATE KEY"
 	ECBlock    BlockType = "EC PRIVATE KEY"
 )
 
-//ParsedPrivateKeyContainer allows common key setting for certs and CSRs
+// ParsedPrivateKeyContainer allows common key setting for certs and CSRs
 type ParsedPrivateKeyContainer interface {
 	SetParsedPrivateKey(crypto.Signer, PrivateKeyType, []byte)
 }
@@ -305,7 +305,7 @@ func (p *ParsedCertBundle) Verify() error {
 	if p.PrivateKey != nil && p.Certificate != nil {
 		equal, err := ComparePublicKeys(p.Certificate.PublicKey, p.PrivateKey.Public())
 		if err != nil {
-			return errors.WithMessageF(err,"could not compare public and private keys: {{err}}", 0)
+			return errors.WithMessageF(err, "could not compare public and private keys: {{err}}", 0)
 		}
 		if !equal {
 			return fmt.Errorf("public key of certificate does not match private key")
@@ -571,7 +571,7 @@ func (p *ParsedCertBundle) GetTLSConfig(usage TLSUsage) (*tls.Config, error) {
 		// Technically we only need one cert, but this doesn't duplicate code
 		certBundle, err := p.ToCertBundle()
 		if err != nil {
-			return nil, errors.WithMessageF(err,"error converting parsed bundle to string bundle when getting TLS config: {{err}}", 0)
+			return nil, errors.WithMessageF(err, "error converting parsed bundle to string bundle when getting TLS config: {{err}}", 0)
 		}
 
 		caPool := x509.NewCertPool()

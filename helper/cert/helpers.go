@@ -14,8 +14,8 @@ import (
 	"encoding/asn1"
 	"encoding/pem"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/helper/json"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/helper/json"
 	"io"
 	"io/ioutil"
 	"math/big"
@@ -315,7 +315,6 @@ func ParsePublicKeyPEM(data []byte) (interface{}, error) {
 }
 
 // addPolicyIdentifiers adds certificate policies extension
-//
 func AddPolicyIdentifiers(data *CreationBundle, certTemplate *x509.Certificate) {
 	for _, oidstr := range data.Params.PolicyIdentifiers {
 		oid, err := StringToOid(oidstr)

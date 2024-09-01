@@ -5,12 +5,10 @@ package json
 
 import (
 	"encoding/json"
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/library/messaging"
-	"git.u-linke.com/ulink/commons/library/transformers"
-	"github.com/mainflux/mainflux/pkg/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/transformers"
 	"strings"
-
 )
 
 const sep = "/"
@@ -19,11 +17,11 @@ var keys = [...]string{"publisher", "protocol", "channel", "subtopic"}
 
 var (
 	// ErrTransform reprents an error during parsing message.
-	ErrTransform         = errors.New("unable to parse JSON object",700)
-	errInvalidKey        = errors.New("invalid object key",701)
-	errUnknownFormat     = errors.New("unknown format of JSON message",702)
-	errInvalidFormat     = errors.New("invalid JSON object",703)
-	errInvalidNestedJSON = errors.New("invalid nested JSON object",704)
+	ErrTransform         = errors.New("unable to parse JSON object", 700)
+	errInvalidKey        = errors.New("invalid object key", 701)
+	errUnknownFormat     = errors.New("unknown format of JSON message", 702)
+	errInvalidFormat     = errors.New("invalid JSON object", 703)
+	errInvalidNestedJSON = errors.New("invalid nested JSON object", 704)
 )
 
 type funcTransformer func(messaging.Message) (interface{}, error)
@@ -37,7 +35,7 @@ func (fh funcTransformer) Transform(msg messaging.Message) (interface{}, error) 
 	return fh(msg)
 }
 
-//pb转换为json
+// pb转换为json
 func transformer(msg messaging.Message) (interface{}, error) {
 	ret := Message{
 		Publisher: msg.Publisher,
@@ -48,18 +46,18 @@ func transformer(msg messaging.Message) (interface{}, error) {
 	}
 	subs := strings.Split(ret.Subtopic, ".")
 	if len(subs) == 0 {
-		return nil, errors.Wrap(ErrTransform, errUnknownFormat)
+		return nil, errors.Join(ErrTransform, errUnknownFormat)
 	}
 	format := subs[len(subs)-1]
 	var payload interface{}
 	if err := json.Unmarshal(msg.Payload, &payload); err != nil {
-		return nil, errors.Wrap(ErrTransform, err)
+		return nil, errors.Join(ErrTransform, err)
 	}
 	switch p := payload.(type) {
 	case map[string]interface{}:
 		flat, err := Flatten(p)
 		if err != nil {
-			return nil, errors.Wrap(ErrTransform, err)
+			return nil, errors.Join(ErrTransform, err)
 		}
 		ret.Payload = flat
 		return Messages{[]Message{ret}, format}, nil
@@ -69,11 +67,11 @@ func transformer(msg messaging.Message) (interface{}, error) {
 		for _, val := range p {
 			v, ok := val.(map[string]interface{})
 			if !ok {
-				return nil, errors.Wrap(ErrTransform, errInvalidNestedJSON)
+				return nil, errors.Join(ErrTransform, errInvalidNestedJSON)
 			}
 			flat, err := Flatten(v)
 			if err != nil {
-				return nil, errors.Wrap(ErrTransform, err)
+				return nil, errors.Join(ErrTransform, err)
 			}
 			newMsg := ret
 			newMsg.Payload = flat
@@ -81,7 +79,7 @@ func transformer(msg messaging.Message) (interface{}, error) {
 		}
 		return Messages{res, format}, nil
 	default:
-		return nil, errors.Wrap(ErrTransform, errInvalidFormat)
+		return nil, errors.Join(ErrTransform, errInvalidFormat)
 	}
 }
 

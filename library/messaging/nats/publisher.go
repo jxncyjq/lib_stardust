@@ -5,7 +5,7 @@ package nats
 
 import (
 	"fmt"
-	"git.u-linke.com/ulink/commons/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
 
 	"github.com/gogo/protobuf/proto"
 	broker "github.com/nats-io/nats.go"

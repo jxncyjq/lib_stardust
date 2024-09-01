@@ -1,6 +1,9 @@
 package server
 
-import "git.u-linke.com/ulink/commons/library/worm"
+import (
+	"github.com/aws/aws-sdk-go-v2/service/mq"
+	"github.com/coreos/go-etcd/etcd"
+)
 
 // IServer 包含Service ，Service包含Component ,Component包括Module
 type IServer interface {
@@ -14,12 +17,11 @@ type IServer interface {
 // Server struct
 type Server struct {
 	etcdClient *etcd.Client
-	wormClient *worm.Client
 	mqClient   *mq.Client
 }
 
 func NewServer() *Server {
-
+	return &Server{}
 }
 
 func (srv *Server) Init() {

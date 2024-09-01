@@ -5,8 +5,8 @@ import (
 	"compress/gzip"
 	"encoding/json"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/compress"
-	"git.u-linke.com/ulink/commons/helper/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/helper/compress"
 	"io"
 	"strings"
 )
@@ -65,7 +65,7 @@ func DecodeJSON(data []byte, out interface{}) error {
 	// Decompress the data if it was compressed in the first place
 	decompressedBytes, uncompressed, err := compress.Decompress(data)
 	if err != nil {
-		return errors.WithMessage(err,"failed to decompress JSON: {{err}}",0)
+		return errors.WithMessage(err, "failed to decompress JSON: {{err}}", 0)
 	}
 	if !uncompressed && (decompressedBytes == nil || len(decompressedBytes) == 0) {
 		return fmt.Errorf("decompressed data being decoded is invalid")

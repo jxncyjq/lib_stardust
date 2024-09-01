@@ -1,12 +1,12 @@
 package utils
 
 import (
-	"git.u-linke.com/ulink/commons/helper/errors"
 	"github.com/gofrs/uuid"
+	"github.com/jxncyjq/lib_stardust/core/errors"
 )
 
 // ErrGeneratingID indicates error in generating UUID
-var ErrGeneratingID = errors.New("generating id failed",0)
+var ErrGeneratingID = errors.New("generating id failed", 0)
 
 var _ IDProvider = (*uuidProvider)(nil)
 

@@ -6,8 +6,8 @@ package mqtt
 import (
 	"errors"
 	"fmt"
-	"git.u-linke.com/ulink/commons/library/messaging"
 	"github.com/hashicorp/go-hclog"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -24,7 +24,7 @@ var (
 type subscriber struct {
 	client  mqtt.Client
 	timeout time.Duration
-	logger hclog.InterceptLogger
+	logger  hclog.InterceptLogger
 }
 
 // NewSubscriber returns a new MQTT message subscriber.

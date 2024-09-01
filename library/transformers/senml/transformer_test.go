@@ -6,13 +6,12 @@ package senml_test
 import (
 	"encoding/hex"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/library/messaging"
-	"git.u-linke.com/ulink/commons/library/transformers/senml"
+	"github.com/jxncyjq/lib_stardust/library/messaging"
+	"github.com/jxncyjq/lib_stardust/library/transformers/senml"
 	"github.com/mainflux/mainflux/pkg/errors"
-	"testing"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
 )
 
 func TestTransformJSON(t *testing.T) {

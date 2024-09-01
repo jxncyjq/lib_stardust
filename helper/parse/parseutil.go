@@ -3,8 +3,8 @@ package parse
 import (
 	"encoding/json"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/helper/strutil"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/helper/strutil"
 	"strconv"
 	"strings"
 	"time"
@@ -60,7 +60,7 @@ func ParseDurationSecond(in interface{}) (time.Duration, error) {
 	case time.Duration:
 		dur = inp
 	default:
-		return 0, errors.New("could not parse duration from input",0)
+		return 0, errors.New("could not parse duration from input", 0)
 	}
 
 	return dur, nil
@@ -97,7 +97,7 @@ func ParseInt(in interface{}) (int64, error) {
 	case uint64:
 		ret = int64(in.(uint64))
 	default:
-		return 0, errors.New("could not parse value from input",0)
+		return 0, errors.New("could not parse value from input", 0)
 	}
 
 	return ret, nil
@@ -170,7 +170,7 @@ func ParseAddrs(addrs interface{}) ([]*sockaddr.SockAddrMarshaler, error) {
 	for _, addr := range stringAddrs {
 		sa, err := sockaddr.NewSockAddr(addr)
 		if err != nil {
-			return nil, errors.WithMessage(err,fmt.Sprintf("error parsing address %q: {{err}}", addr), 0)
+			return nil, errors.WithMessage(err, fmt.Sprintf("error parsing address %q: {{err}}", addr), 0)
 		}
 		out = append(out, &sockaddr.SockAddrMarshaler{
 			SockAddr: sa,

@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
+	"github.com/jxncyjq/lib_stardust/core/errors"
 	"sort"
 	"strings"
 
@@ -100,11 +100,11 @@ func ParseKeyValues(input string, out map[string]string, sep string) error {
 
 // ParseArbitraryKeyValues parses arbitrary <key,value> tuples. The input
 // can be one of the following:
-// * JSON string
-// * Base64 encoded JSON string
-// * Comma separated list of `<key>=<value>` pairs
-// * Base64 encoded string containing comma separated list of
-//   `<key>=<value>` pairs
+//   - JSON string
+//   - Base64 encoded JSON string
+//   - Comma separated list of `<key>=<value>` pairs
+//   - Base64 encoded string containing comma separated list of
+//     `<key>=<value>` pairs
 //
 // Input will be parsed into the output parameter, which should
 // be a non-nil map[string]string.
@@ -131,7 +131,7 @@ func ParseArbitraryKeyValues(input string, out map[string]string, sep string) er
 		// If JSON unmarshalling fails, consider that the input was
 		// supplied as a comma separated string of 'key=value' pairs.
 		if err = ParseKeyValues(input, out, sep); err != nil {
-			return errors.WithMessageF(err,"failed to parse the input: {{err}}", 0)
+			return errors.WithMessageF(err, "failed to parse the input: {{err}}", 0)
 		}
 	}
 

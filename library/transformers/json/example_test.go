@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	mfjson "git.u-linke.com/ulink/commons/library/transformers/json"
+	mfjson "github.com/jxncyjq/lib_stardust/library/transformers/json"
 )
 
 func ExampleParseFlat() {

@@ -4,15 +4,15 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/errors"
-	"git.u-linke.com/ulink/commons/helper/parse"
-	"git.u-linke.com/ulink/commons/helper/strutil"
+	"github.com/jxncyjq/lib_stardust/core/errors"
+	"github.com/jxncyjq/lib_stardust/helper/parse"
+	"github.com/jxncyjq/lib_stardust/helper/strutil"
 	"io/ioutil"
 	"net"
 	"strings"
 )
 
-var ErrInvalidCertParams = errors.New("invalid certificate parameters",0)
+var ErrInvalidCertParams = errors.New("invalid certificate parameters", 0)
 
 // TLSLookup maps the tls_min_version configuration to the internal value
 var TLSLookup = map[string]uint16{
@@ -138,7 +138,7 @@ func LoadClientTLSConfig(caCert, clientCert, clientKey string) (*tls.Config, err
 
 		data, err := ioutil.ReadFile(caCert)
 		if err != nil {
-			return nil, errors.WithMessageF(err,"failed to read CA file: {{err}}", 0)
+			return nil, errors.WithMessageF(err, "failed to read CA file: {{err}}", 0)
 		}
 
 		if !pool.AppendCertsFromPEM(data) {
@@ -182,7 +182,7 @@ func SetupTLSConfig(conf map[string]string, address string) (*tls.Config, error)
 	if tlsSkipVerify != "" {
 		b, err := parse.ParseBool(tlsSkipVerify)
 		if err != nil {
-			return nil, errors.WithMessageF(err,"failed parsing tls_skip_verify parameter: {{err}}", 0)
+			return nil, errors.WithMessageF(err, "failed parsing tls_skip_verify parameter: {{err}}", 0)
 		}
 		insecureSkipVerify = b
 	}
@@ -210,7 +210,7 @@ func SetupTLSConfig(conf map[string]string, address string) (*tls.Config, error)
 	if okCert && okKey {
 		tlsCert, err := tls.LoadX509KeyPair(conf["tls_cert_file"], conf["tls_key_file"])
 		if err != nil {
-			return nil, errors.WithMessageF(err,"client tls setup failed: {{err}}", 0)
+			return nil, errors.WithMessageF(err, "client tls setup failed: {{err}}", 0)
 		}
 
 		tlsClientConfig.Certificates = []tls.Certificate{tlsCert}
@@ -223,7 +223,7 @@ func SetupTLSConfig(conf map[string]string, address string) (*tls.Config, error)
 
 		data, err := ioutil.ReadFile(tlsCaFile)
 		if err != nil {
-			return nil, errors.WithMessageF(err,"failed to read CA file: {{err}}", 0)
+			return nil, errors.WithMessageF(err, "failed to read CA file: {{err}}", 0)
 		}
 
 		if !caPool.AppendCertsFromPEM(data) {

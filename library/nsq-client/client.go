@@ -1,9 +1,12 @@
-//nsq客户端，目前只实现了消息的发送，使用FAN-OUT模型
-//mainChan为主chan
-//为发现的每个nsqd启动一个go routine，从mainCh 读取读取数据并且写入子routine的inCh(带缓冲默认128)
-//			   /----- nsq_publisher.publish(inCh)
-//mainChan --- ------ nsq_publisher.publishAsync(inCh)
-//             \----- nsq_publisher.publishMultiAsync(inCh)
+// nsq客户端，目前只实现了消息的发送，使用FAN-OUT模型
+// mainChan为主chan
+// 为发现的每个nsqd启动一个go routine，从mainCh 读取读取数据并且写入子routine的inCh(带缓冲默认128)
+//
+//	/----- nsq_publisher.publish(inCh)
+//
+// mainChan --- ------ nsq_publisher.publishAsync(inCh)
+//
+//	\----- nsq_publisher.publishMultiAsync(inCh)
 package nsq_client
 
 import (
@@ -11,15 +14,15 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"git.u-linke.com/ulink/commons/helper/system/thread"
 	"github.com/hashicorp/go-hclog"
+	"github.com/jxncyjq/lib_stardust/core/system/thread"
 	"github.com/nsqio/go-nsq"
 	"math/rand"
 	"sync"
 	"time"
 )
 
-//Warning: 非标准nsq client实现，只实现了发送逻辑
+// Warning: 非标准nsq client实现，只实现了发送逻辑
 type NSQClient interface {
 	NodeAddress() []string
 	Lookup() error
@@ -82,7 +85,7 @@ func NewNsqClient(cfg *Config, topic string, logger hclog.Logger) (NSQClient, er
 	}, nil
 }
 
-//通过lookupd查找nsqd的地址
+// 通过lookupd查找nsqd的地址
 func (nc *nsqClient) Lookup() error {
 	nc.cfg.UserAgent = fmt.Sprintf("go-nsq/%s", nsq.VERSION)
 	lookup := NewLookup(nsq.NewConfig(), nc.lookupdHTTPAddrs, nc.topic)
@@ -136,7 +139,7 @@ func (nc *nsqClient) Send(data []byte) {
 	}
 }
 
-//启动所有producer的处理逻辑
+// 启动所有producer的处理逻辑
 func (nc *nsqClient) StartProducers(useAsync bool, batchSize int) error {
 	nc.Lock()
 	defer nc.Unlock()
